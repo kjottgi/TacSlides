@@ -12,6 +12,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.image import Image
+from kivy.uix.button import Button
 
 
 height = 200
@@ -19,25 +20,25 @@ height = 200
 class PongGame(Widget):
     pass
 # The GUI made
-
+def close_app(instance):
+        App.get_running_app().stop()
 
 #Returns the GUI?
 class PongApp(App):
     def build(self):
         return PongGame()
     
+    
 
 class background(App):
     def build(self):
-        # Create a FloatLayout as the root widget
-        root = FloatLayout()
-
-        # Create an Image widget as the background
+        root = FloatLayout()        #switch this to whatever png we need
         bg_image = Image(source='TacSlides/GUIS/firewatch.png', allow_stretch=True, keep_ratio=False)
-
-        # Add the Image widget to the root widget
+        
+        close_button = Button(text='Close', size_hint=(0.2, 0.1), pos_hint={'right': 1, 'top': 1})
+        close_button.bind(on_press=close_app)
         root.add_widget(bg_image)
-
+        root.add_widget(close_button)
         return root
 
     
